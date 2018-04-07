@@ -68,7 +68,7 @@ char* argv[]; {
     if (argc != 2) usage();
     /* couldn't get atoi to work */
     N = *argv[1] - '0';
-    if (N <= 0) usage();
+    if (N <= 0 || N > 10) usage();
     
     init();
 

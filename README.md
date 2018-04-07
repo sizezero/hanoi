@@ -1,7 +1,7 @@
 
 # Primitive Tower's of Hanoi
 
-I stopped by the living computer museum a couple weekends ago and found some amazing old unixy systems that are older than I am. I want to try to run some non-trivial program on them so I figured I'd code it up first.
+I stopped by the [living computer museum](http://www.livingcomputers.org/) a couple weekends ago and found some amazing old unixy systems that are older than I am. I want to try to run some non-trivial program on them so I figured I'd code it up first.
 
 I'm going to try a program that solves the towers of hanoi problem in a primitive version of C.
 
@@ -11,7 +11,7 @@ While writing this I figured it would be helpful to actually emulate some old ma
 
 ## Old C
 
-There are definitely some quirks between old [C and new C](http://ee.hawaii.edu/~tep/EE160/Book/chapapx/node7.html). The most significant differences are:
+There are definitely some quirks between [old C and new C](http://ee.hawaii.edu/~tep/EE160/Book/chapapx/node7.html). The most significant differences are:
 
 1. Variable declarations must come before all other instructions.
 1. Variable declarations cannot include assignments.
@@ -35,11 +35,12 @@ func1() {
     i=3;
 }
 
-func2(char* msg) { /* ERROR can't combine names and types in fn parms */
+func2(char* msg, int count) { /* ERROR can't combine names and types in fn parms */
 }
 
-func2(msg)
-char* msg {
+func2(msg, count)
+char* msg;
+int count; {
 }
 
 // I'm a cutting edge one line comment
@@ -55,3 +56,6 @@ I'm finding the old version of ed is even more primitive than the modern GNU one
 1. Range parameters must be fully specified e.g. 1,5l not 1,l. You actually need to be aware of how many lines are currently in the file.
 1. Many commands are missing including P
 1. I don't see a manual for this anywhere. The archived PDFs of the online manuals seem to document a newer version with more commands.
+
+## Lessons
+
