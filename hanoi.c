@@ -1,10 +1,7 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-
 /* let's write this in a functional way with global variables and naked functions */
 
-void usage() {
+usage() {
     printf("usage\n");
     printf("\thanoi <num disks>\n");
     printf("\t<num disks must be an integer value\n");
@@ -13,33 +10,65 @@ void usage() {
 
 /* the number of disks */
 int N;
-int **stacks[3];
+int stacks[3][10];
 
-void init() {
-    for (int i=0 ; i<3 ; ++i) {
-        stacks[i]=malloc(sizeof(int)*N);
-        for (int j=0 ; j<N ; ++j)
+init() {
+    int i,j;
+    for (i=0 ; i<3 ; ++i) {
+        for (j=0 ; j<N ; ++j)
             if (i==0)
-                //stacks[i][j]=j+1;
+                stacks[i][j]=j+1;
             else
                 stacks[i][j]=0;
     }
 }
 
-void printDisk(int v) {
-    
+/*
+N==4
+1 '    *    '
+2 '   ***   '
+3 '  *****  '
+4 ' ******* '
+Whitespace amount is: N+1-v
+Star amount is: 1+(v-1)*2
+*/
+printDisk(v)
+int v; {
+    int w,s,i;
+    if (v==0) {
+        for (i=0 ; i<N ; ++i)
+            putchar(' ');
+        putchar('I');
+        for (i=0 ; i<N ; ++i)
+            putchar(' ');
+    } else {
+        w = N+1-v;
+        s = 1+(v-1)*2;
+        for (i=0 ; i<w ; ++i)
+            putchar(' ');
+        for (i=0 ; i<s ; ++i)
+            putchar('*');
+        for (i=0 ; i<w ; ++i)
+            putchar(' ');
+    }
 }
 
-void printStacks() {
-    for (int j=0 ; j<N ; ++j)
-        for (int i=0 ; i<3 ; ++i)
-            ;
+printStacks() {
+    int i,j;
+    for (j=0 ; j<N ; ++j) {
+        for (i=0 ; i<3 ; ++i)
+            printDisk(stacks[i][j]);
+        putchar('\n');
+    }
 }
 
-int main(int argc, char* argv[]) {
+main(argc, argv)
+int argc;
+char* argv[]; {
     if (argc != 2) usage();
-    N = atoi(argv[1]);
-    if (N == 0) usage();
+    /* couldn't get atoi to work */
+    N = *argv[1] - '0';
+    if (N <= 0) usage();
     
     init();
 

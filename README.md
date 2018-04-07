@@ -11,12 +11,15 @@ While writing this I figured it would be helpful to actually emulate some old ma
 
 ## Old C
 
-There are definitely some quirks between old and new C. The most significant differences are:
+There are definitely some quirks between old [C and new C](http://ee.hawaii.edu/~tep/EE160/Book/chapapx/node7.html). The most significant differences are:
 
-1. variable declarations must come before all other instructions
-1. variable declarations cannot include assignments
-1. function arguments and types must be on separate lines
-1. only old fashioned comments are allowed
+1. Variable declarations must come before all other instructions.
+1. Variable declarations cannot include assignments.
+1. Function arguments and types must be on separate lines.
+1. Only old fashioned comments are allowed.
+1. Void is not allowed as a function return type.
+1. Standard includes don't exist.
+1. Heap allocation doesn't exist.
 
 ```C
 func1() {
