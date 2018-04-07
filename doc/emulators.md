@@ -7,7 +7,7 @@ One of the easier ways to get started is to simply run a docker image that emula
 
 Unfortunately if you try to run the C compiler you get the following errors:
 
-'''
+```
 $ docker run --rm -it bahamat/unix-1st-ed
 
 PDP-11 simulator V3.9-0
@@ -55,7 +55,8 @@ It seems that not only is /usr/lib/ missing but there aren't any libraries to be
 
 I found another image that claims to [simulate some old v7 unix on a PDP11](https://hub.docker.com/r/jguillaumes/simh-vax/)
 
-```$ docker run --rm -e SIMH_USE_CONTAINER='yes' -it jguillaumes/simh-pdpv7
+```
+$ docker run --rm -e SIMH_USE_CONTAINER='yes' -it jguillaumes/simh-pdpv7
 SIMH_USE_CONTAINER=yes, using container storage
 Copying distribution files...
 '/image/RP04.000.gz' -> './RP04.000.gz'
@@ -109,7 +110,7 @@ Log file closed
 $ 
 ```
 
-This has a c compiler that make work but since the terminal is all caps and appears to be incapable of entering symbols such as curly braces, I have no idea how I would be able to program in C on this machine. I bet the problem is somehow reconfiguring the terminal.
+This has a C compiler that might work but since the terminal is all caps and appears to be incapable of entering symbols such as curly braces, I have no idea how I would be able to program in C on this machine. I bet the problem is somehow reconfiguring the terminal.
 
 ## SIMH
 
@@ -120,6 +121,11 @@ You can either install the latest ubuntu package
 ```
 $ sudo apt-get install simh
 $ pdp11
+
+PDP-11 simulator V3.8-1
+sim> exit
+Goodbye
+$ 
 ```
 
 ...or if you want a newer version build it straight from github
@@ -142,12 +148,14 @@ A good description of running Unix System v5 can be found in a [Linux Journal ar
 
 Run this once to download and unzip the Unix System v5 image
 
-```./get-image.sh
+```
+./get-image.sh
 ```
 
 Running the emulator
 
-```$ pdp11
+```
+$ pdp11
 
 PDP-11 simulator V3.8-1
 Disabling XQ
