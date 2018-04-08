@@ -3,7 +3,7 @@
 
 I stopped by the [living computer museum](http://www.livingcomputers.org/) a couple weekends ago and found some amazing old unixy systems that are older than I am. I want to try to run some non-trivial program on them so I figured I'd code it up first.
 
-I'm going to try a program that solves the towers of hanoi problem in a primitive version of C.
+I'm going to try a program that solves the [towers of hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi) problem in a primitive version of C.
 
 ## Emulators
 
@@ -13,14 +13,14 @@ While writing this I figured it would be helpful to actually emulate some old ma
 
 There are definitely some quirks between [old C and new C](http://ee.hawaii.edu/~tep/EE160/Book/chapapx/node7.html). The most significant differences are:
 
-1. Variable declarations must come before all other instructions.
-1. Variable declarations cannot include assignments.
-1. Function arguments and types must be on separate lines.
-1. Only old fashioned comments are allowed.
-1. Void is not allowed as a function return type.
-1. Standard includes don't exist. (although #define does exist but the terminal has a hard time with non-escaped # characters)
-1. Heap allocation (malloc) doesn't exist.
-1. The parser is easily confused by ambiguity. Expressions such as j==-1 are somehow interpreted as an assignment and should instead be written as j == -1
+* Variable declarations must come before all other instructions.
+* Variable declarations cannot include assignments.
+* Function arguments and types must be on separate lines.
+* Only old fashioned comments are allowed.
+* Void is not allowed as a function return type.
+* Standard includes don't exist. (although `#define` does exist but the terminal has a hard time with non-escaped # characters)
+* Heap allocation doesn't exist. No `malloc()`
+* The parser is easily confused by ambiguity. Expressions such as `j==-1` are somehow interpreted as an assignment and should instead be written as `j == -1`
 
 ```C
 func1() {
@@ -54,20 +54,37 @@ I guess the only editor you can count on is [ed](https://en.wikipedia.org/wiki/E
 
 I'm finding the old version of ed is even more primitive than the modern GNU one.
 
-1. Range parameters must be fully specified e.g. 1,5l not 1,l. You actually need to be aware of how many lines are currently in the file.
-1. Many commands are missing including P
-1. I don't see a manual for this anywhere. The archived PDFs of the online manuals seem to document a newer version with more commands.
+* Range parameters must be fully specified e.g. `1,5l` not `1,l.` You actually need to be aware of how many lines are currently in the file.
+* Many commands are missing including `P`
+* I don't see a manual for this anywhere. The archived PDFs of the online manuals seem to document a newer version with more commands.
 
 # Other System Limitations
 
 Filenames are limited to 14 characters. Longer filenames are often silently truncated.
 
-Backspace and delete don't work. However @ means ignore all previous characters and # means ignore the previous character. This means the line "cd@chdir rbo##obert" is interpreted as "chdir robert"
+Backspace and delete don't work. However `@` means ignore all previous characters and `#` means ignore the previous character. This means the line `cd@chdir rbo##obert` is interpreted as `chdir robert`
+
+Ideally you should be able to develop a big C file in a modern environment and cut and paste it into an ancient machine's terminal. `gcc` actually compiles primitive C, it just adds lots of warnings. Unfortunately the terminal hangs on pastes that are larger than a couple hundred characters. One way around this is to paste into multiple files and then cat them together.
+
+<pre>
+$ <b>cat >p1.c
+<i>paste first chunk</i>
+^D</b>
+$ <b>cat >p1.c
+<i>paste second chunk</i>
+^D</b>
+$ <b>cat >p1.c
+<i>paste third chunk</i>
+^D</b>
+$ <b>cat p?.c > p.c</b>
+$ <b>cc p.c</b>
+$ <b>./a.out</b>
+</pre>
 
 ## Lessons
 
-After using linux without history I started to make my filenames very short. Now I know where cp, mv, du, etc. came from.
+After using linux without history I started to make my filenames very short. Now I know where `cp`, `mv`, `du`, etc. came from.
 
-Having to scope all variables at the top of the function means you may have to reuse the variables for different purposes. You might as well call them i, j, k
+Having to scope all variables at the top of the function means you may have to reuse the variables for different purposes. You might as well call them `i`, `j`, `k`
 
 I am so used to compiler help. In particular no type checking is difficult.

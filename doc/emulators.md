@@ -7,8 +7,8 @@ One of the easier ways to get started is to simply run a docker image that emula
 
 Unfortunately if you try to run the C compiler you get the following errors:
 
-```
-$ docker run --rm -it bahamat/unix-1st-ed
+<pre>
+$ <b>docker run --rm -it bahamat/unix-1st-ed</b>
 
 PDP-11 simulator V3.9-0
 ./simh.cfg> #!tools/pdp11
@@ -20,43 +20,41 @@ TC: creating new file
 TC0: 16b format, buffering file in memory
 Listening on port 5555 (socket 7)
 
-:login: root
+:login: <b>root</b>
 root
 # ls
 bin
 dev
 etc
 tmp
-# cat >foo.c
-
-include <stdio.h>
-
+# <b>cat >foo.c
 main() {
 printf("hello\n");
 }
-# cc foo.c
+^D</b>
+# <b>cc foo.c</b>
 Can't find /usr/lib/c0
 Can't find /usr/lib/c1
 I
 /tmp/ctm3a?
 move failed: foo.o
-# ^D
+# <b>^D</b>
 :login: 
 Simulation stopped, PC: 007332 (MOV (SP)+,25244)
-sim> exit
+sim> <b>exit</b>
 Goodbye
 RF: writing buffer to file
 $
-```
+</pre>
 
-It seems that not only is /usr/lib/ missing but there aren't any libraries to be found. Trying to install new libraries on this is probably a bigger job than finding a better emulator.
+It seems that not only is `/usr/lib/` missing but there aren't any libraries to be found. Trying to install new libraries on this is probably a bigger job than finding a better emulator.
 
 ## Other Docker Images
 
 I found another image that claims to [simulate some old v7 unix on a PDP11](https://hub.docker.com/r/jguillaumes/simh-vax/)
 
-```
-$ docker run --rm -e SIMH_USE_CONTAINER='yes' -it jguillaumes/simh-pdpv7
+<pre>
+$ <b>docker run --rm -e SIMH_USE_CONTAINER='yes' -it jguillaumes/simh-pdpv7</b>
 SIMH_USE_CONTAINER=yes, using container storage
 Copying distribution files...
 '/image/RP04.000.gz' -> './RP04.000.gz'
@@ -78,11 +76,11 @@ Listening on port 2323
 = Press CTRL-D after the "#" prompt to enable multiuser        =
 " The initial password for the root account is 'root'          =
 ================================================================
-boot
+<b>boot</b>
 Boot
-: hp(0,0)unix
+: <b>hp(0,0)unix</b>
 mem = 175360
-# LS
+# <b>LS</b>
 A.OUT
 BIN
 BOOT
@@ -95,20 +93,20 @@ OLDUNIX
 TMP
 UNIX
 USR
-# LS BIN/CC
+# <b>LS BIN/CC</b>
 BIN/CC
-# ^D
+# <b>^D</b>
 # RESTRICTED RIGHTS: USE, DUPLICATION, OR DISCLOSURE
 IS SUBJECT TO RESTRICTIONS STATED IN YOUR CONTRACT WITH
 WESTERN ELECTRIC COMPANY, INC.
 SAT MAY 14 01:25:22 GMT+1:00 2016
 
-login: ^E
+login: <b>^E</b>
 Simulation stopped, PC: 002326 (MOV (SP)+,177776)
 Goodbye
 Log file closed
 $ 
-```
+</pre>
 
 This has a C compiler that might work but since the terminal is all caps and appears to be incapable of entering symbols such as curly braces, I have no idea how I would be able to program in C on this machine. I bet the problem is somehow reconfiguring the terminal.
 
@@ -118,27 +116,27 @@ Running an emulator isn't that hard. [SIMH](http://simh.trailing-edge.com/) appe
 
 You can either install the latest ubuntu package
 
-```
-$ sudo apt-get install simh
-$ pdp11
+<pre>
+$ <b>sudo apt-get install simh</b>
+$ <b>pdp11</b>
 
 PDP-11 simulator V3.8-1
-sim> exit
+sim> <b>exit</b>
 Goodbye
 $ 
-```
+</pre>
 
 ...or if you want a newer version build it straight from github
 
-```
-$ git clone https://github.com/simh/simh
-$ cd simh
-$ make pdp11
-$ BIN/pdp11
+<pre>
+$ <b>git clone https://github.com/simh/simh</b>
+$ <b>cd simh</b>
+$ <b>make pdp11</b>
+$ <b>BIN/pdp11</b>
 
 PDP-11 simulator V4.0-0 Current        git commit id: 81bcd6d3
 sim> 
-```
+</pre>
 
 Running the simulator isn't enough. You actually have to configure the simulator to emulate a specific type of hardware
 
@@ -148,21 +146,22 @@ A good description of running Unix System v5 can be found in a [Linux Journal ar
 
 Run this once to download and unzip the Unix System v5 image
 
-```
-./get-image.sh
-```
+<pre>
+$ <b>cd hanoi/unix-v5</b>
+$ <b>./get-image.sh</b>
+</pre>
 
 Running the emulator
 
-```
-$ pdp11
+<pre>
+$ <b>pdp11</b>
 
 PDP-11 simulator V3.8-1
 Disabling XQ
-@unix
+@<b>unix</b>
 
-;login: root
-# ls
+;login: <b>root</b>
+# <b>ls</b>
 bin
 dev
 etc
@@ -171,19 +170,23 @@ mnt
 tmp
 unix
 usr
-# cat >hello.c
+# <b>cat >hello.c
 main() {
         printf("hello\n");
-}^D
-# cc hello.c
-# ./a.out
+}^D</b>
+# <b>cc hello.c</b>
+# <b>./a.out</b>
 hello
-# ^D
-;login: ^E
+# <b>^D</b>
+;login: <b>^E</b>
 Simulation stopped, PC: 001726 (MOV (SP)+,177776)
-sim> exit
+sim> <b>exit</b>
 Goodbye
 $ 
-```
+</pre>
 
-There you have it. We wrote and ran a C program on an ancient UNIX!
+There you have it. We wrote and ran a C program on an ancient UNIX! The emulator actually persists the filesystem of multiple runs so be careful you don't screw it up. If you want to reset you can just copy back the original filesystem.
+
+<pre>
+$ <b>cp unix_v5_rk.dsk.orig unix_v5_rk.dsk</b>
+</pre>
