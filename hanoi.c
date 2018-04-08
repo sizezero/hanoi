@@ -10,6 +10,16 @@ usage() {
 
 /* the number of disks */
 int N;
+/*
+Three stacks with a maximum depth of 10.
+Lower indicies represent the top of the stack.
+Higher indices represent the bottom of the stack.
+0 for the element represents an empty value
+a positive integer element represents a disk of the specified size
+
+We should define 10 as a constant but preprocessing is
+problematic in the compiler I'm using.
+*/
 int stacks[3][10];
 
 init() {
@@ -33,20 +43,23 @@ int n; {
 }
 
 /*
+Prints a single disk with a fixed width.
 if v is:
-negative: print the spindle number as -v
-zero    : print the empty spindle
 positive: print the disk of the given size
+zero    : print the empty space
+negative: print the stack tray with label -v
 */
 printDisk(v)
 int v; {
 
     /*
       N==4
-      1 '    *    '
-      2 '   ***   '
-      3 '  *****  '
-      4 ' ******* '
+      0  '         '
+      1  '    *    '
+      2  '   ***   '
+      3  '  *****  '
+      4  ' ******* '
+      -1 ' [  1  ] '
       Whitespace amount is: N+1-v
       Star amount is: 1+(v-1)*2
      */
@@ -70,6 +83,7 @@ int v; {
     }
 }
 
+/* print all stacks with a labeled tray at the bottom */
 printStacks() {
     int i,j;
 
@@ -83,6 +97,10 @@ printStacks() {
     putchar('\n');
 }
 
+/*
+prints a description of the  move from one state to another
+as well as the resulting stacks
+*/
 printMove(src, dst)
 int src;
 int dst; {
@@ -91,7 +109,7 @@ int dst; {
 }
 
 /*
-returns the index of the top disk from the given spindle
+returns the index of the top disk from the given stack
 returns -1 if the stack is empty
  */
 int top(i)
@@ -103,8 +121,10 @@ int i; {
 }
 
 /*
-move disks from src to dst using tmp as an intermediate
-count disks are moved from the src stack
+Move disks from src stack to dst stack
+using tmp stack as an intermediate.
+"count" number of disks are moved from
+the top of the src stack.
  */
 move(src, dst, tmp, count)
 int src;
@@ -124,11 +144,11 @@ int count; {
         stacks[src][i] = 0;
         printMove(src, dst);
     } else {
-        /* move all but the bottom disks to the temp spindle */
+        /* move all but the bottom disks to the temp stack */
         move(src, tmp, dst, count-1);
         /* move the last/bottom source disk to the destination */
         move(src, dst, tmp, 1);
-        /* move the disks from the temp spindle to the destination */
+        /* move the disks from the temp stack to the destination */
         move(tmp, dst, src, count-1);
     }
 }
