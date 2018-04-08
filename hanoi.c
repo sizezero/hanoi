@@ -78,7 +78,7 @@ printStacks() {
             printDisk(stacks[i][j]);
         putchar('\n');
     }
-    for (i=-1 ; i>=-3 ; --i)
+    for (i = -1 ; i >= -3 ; --i)
         printDisk(i);
     putchar('\n');
 }
@@ -116,7 +116,7 @@ int count; {
         i = top(src);
         j = top(dst);
         /* we have to put the disk on top of the destination disks */
-        if (j==-1)
+        if (j == -1)
             j = N-1;
         else
             --j;
