@@ -190,3 +190,43 @@ There you have it. We wrote and ran a C program on an ancient UNIX! The emulator
 <pre>
 $ <b>cp unix_v5_rk.dsk.orig unix_v5_rk.dsk</b>
 </pre>
+
+# Non-root User
+
+I did some work for a while as `root` and ran into various file corruptions and hangs. While I'm not sure what the root cause of these problems was (yuk) I decided it would be a good idea to reduce my privileges a bit.
+
+<pre>
+$ <b>pdp11</b>
+
+PDP-11 simulator V3.8-1
+Disabling XQ
+@<b>unix</b>
+
+;login: <b>root</b>
+# <b>cat /etc/passwd</b>
+root::0:1::/:
+daemon::1:1::/bin:
+bin::3:1::/bin:
+# <b>ed /etc/passwd</b>
+49
+<b>a
+robert::7:3::/robert:
+.
+w</b>
+71
+<b>q</b>
+# <b>mkdir robert</b>
+# <b>chown robert robert</b>
+# <b>^D</b>
+;login: <b>robert</b>
+% <b>pwd</b>
+../robert
+% <b>cat >/bin/blah</b>
+/bin/blah: cannot create
+% <b>^D</b>
+;login: <b>^E</b>
+Simulation stopped, PC: 001726 (MOV (SP)+,177776)
+sim> <b>exit</b>
+Goodbye
+$ 
+</pre>
