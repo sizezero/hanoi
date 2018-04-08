@@ -59,3 +59,8 @@ I'm finding the old version of ed is even more primitive than the modern GNU one
 
 ## Lessons
 
+After using linux without history I started to make my filenames very short. Now I know where cp, mv, du, etc. came from.
+
+Having to scope all variables at the top of the function means you may have to reuse the variables for different purposes. You might as well call them i, j, k
+
+I am so used to compiler help. In particular no type checking is difficult.
