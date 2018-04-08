@@ -93,4 +93,4 @@ More than once while editing hit `q` expecting changes to be saved before exitin
 
 Source control: I can't believe progress was once made without this tool.
 
-All of these issues make me very gun shy about any changes to the system. I started composing all of my actions before actually entering any of them. I felt like I was chisleling a marble statue. Mistakes are costly. This was a bad thing but it wasn't a 100% bad thing. I think keeping more of this think before doing attitude in modern environments would be a good thing.
+All of these issues make me very gun shy about any changes to the system. I started composing all of my actions before actually entering any of them. I felt like I was chisleling a marble statue. Mistakes are costly. This was a bad thing but it wasn't a 100% bad thing. I think keeping more of this *think before doing* attitude in modern environments would be a good thing.
