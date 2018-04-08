@@ -18,8 +18,9 @@ There are definitely some quirks between [old C and new C](http://ee.hawaii.edu/
 1. Function arguments and types must be on separate lines.
 1. Only old fashioned comments are allowed.
 1. Void is not allowed as a function return type.
-1. Standard includes don't exist.
-1. Heap allocation doesn't exist.
+1. Standard includes don't exist. (although #define does exist but the terminal has a hard time with non-escaped # characters)
+1. Heap allocation (malloc) doesn't exist.
+1. The parser is easily confused by ambiguity. Expressions such as j==-1 are somehow interpreted as an assignment and should instead be written as j == -1
 
 ```C
 func1() {
@@ -56,6 +57,12 @@ I'm finding the old version of ed is even more primitive than the modern GNU one
 1. Range parameters must be fully specified e.g. 1,5l not 1,l. You actually need to be aware of how many lines are currently in the file.
 1. Many commands are missing including P
 1. I don't see a manual for this anywhere. The archived PDFs of the online manuals seem to document a newer version with more commands.
+
+# Other System Limitations
+
+Filenames are limited to 14 characters. Longer filenames are often silently truncated.
+
+Backspace and delete don't work. However @ means ignore all previous characters and # means ignore the previous character. This means the line "cd@chdir rbo##obert" is interpreted as "chdir robert"
 
 ## Lessons
 
