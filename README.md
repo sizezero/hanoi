@@ -70,10 +70,10 @@ Ideally you should be able to develop a big C file in a modern environment and c
 $ <b>cat >p1.c
 <i>paste first chunk</i>
 ^D</b>
-$ <b>cat >p1.c
+$ <b>cat >p2.c
 <i>paste second chunk</i>
 ^D</b>
-$ <b>cat >p1.c
+$ <b>cat >p3.c
 <i>paste third chunk</i>
 ^D</b>
 $ <b>cat p?.c > p.c</b>
@@ -83,8 +83,14 @@ $ <b>./a.out</b>
 
 ## Lessons
 
-After using linux without history I started to make my filenames very short. Now I know where `cp`, `mv`, `du`, etc. came from.
+After using the command line without command history I started to make my filenames very short. Now I know where `cp`, `mv`, `du`, etc. came from.
 
-Having to scope all variables at the top of the function means you may have to reuse the variables for different purposes. You might as well call them `i`, `j`, `k`
+Having to scope all variables at the top of the function means you may have to reuse the variables for different purposes. You might as well call them `i`, `j`, `k`. It makes sense that early versions of K+R C manuals consistently used these letters as variable names.
 
-I am so used to compiler help. In particular no type checking is difficult.
+I am so used to compiler help: typing, mismatched arguments, error messages that mean something, correct line numbers, etc.
+
+More than once while editing hit `q` expecting changes to be saved before exiting. They were not. There was no warning.
+
+Source control: I can't believe progress was once made without this tool.
+
+All of these issues make me very gun shy about any changes to the system. I started composing all of my actions before actually entering any of them. I felt like I was chisleling a marble statue. Mistakes are costly. This was a bad thing but it wasn't a 100% bad thing. I think keeping more of this think before doing attitude in modern environments would be a good thing.
