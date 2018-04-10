@@ -1,5 +1,5 @@
 
-# Emulators
+# Hardware Emulators
 
 ## Unix First Edition
 
@@ -140,7 +140,9 @@ sim>
 
 Running the simulator isn't enough. You actually have to configure the simulator to emulate a specific type of hardware
 
-## Unix System V Images
+## Unix System v5 Images
+
+Note: this is Unix v5 which was released in 1973 not Unix System V which was released in 1983.
 
 A good description of running Unix System v5 can be found in a [Linux Journal article from 2005](http://www.linuxjournal.com/article/8547?page=0,1) This has you download a Unix System v5 image as well as configure the pdp11 emulator for a specific set of hardware. If you enter the [unix-v5](../unix-v5) directory of this project you can start the emulator with the following commands:
 
@@ -191,42 +193,3 @@ There you have it. We wrote and ran a C program on an ancient UNIX! The emulator
 $ <b>cp unix_v5_rk.dsk.orig unix_v5_rk.dsk</b>
 </pre>
 
-# Non-root User
-
-I did some work for a while as `root` and ran into various file corruptions and hangs. While I'm not sure what the root cause of these problems was (yuk) I decided it would be a good idea to reduce my privileges a bit.
-
-<pre>
-$ <b>pdp11</b>
-
-PDP-11 simulator V3.8-1
-Disabling XQ
-@<b>unix</b>
-
-;login: <b>root</b>
-# <b>cat /etc/passwd</b>
-root::0:1::/:
-daemon::1:1::/bin:
-bin::3:1::/bin:
-# <b>ed /etc/passwd</b>
-49
-<b>a
-robert::7:3::/robert:
-.
-w</b>
-71
-<b>q</b>
-# <b>mkdir robert</b>
-# <b>chown robert robert</b>
-# <b>^D</b>
-;login: <b>robert</b>
-% <b>pwd</b>
-../robert
-% <b>cat >/bin/blah</b>
-/bin/blah: cannot create
-% <b>^D</b>
-;login: <b>^E</b>
-Simulation stopped, PC: 001726 (MOV (SP)+,177776)
-sim> <b>exit</b>
-Goodbye
-$ 
-</pre>
